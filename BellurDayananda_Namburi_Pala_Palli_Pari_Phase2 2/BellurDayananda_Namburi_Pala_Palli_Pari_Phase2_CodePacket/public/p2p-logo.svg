@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9333ea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#c026d3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Heart shape -->
+  <path d="M50 75 C50 75, 20 50, 20 35 C20 25, 27 20, 35 20 C40 20, 45 22, 50 28 C55 22, 60 20, 65 20 C73 20, 80 25, 80 35 C80 50, 50 75, 50 75 Z" fill="url(#gradient)"/>
+  
+  <!-- Hands (stylized) -->
+  <path d="M30 35 L25 30 L22 32 L27 40 Z" fill="url(#gradient)" opacity="0.8"/>
+  <path d="M70 35 L75 30 L78 32 L73 40 Z" fill="url(#gradient)" opacity="0.8"/>
+</svg>

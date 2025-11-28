@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/p2p-logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P2P - Learn Together, Grow Together</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <!-- SVG Filters for Advanced Effects -->
+    <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true">
+      <defs>
+        <!-- Gooey blob morphing filter -->
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+          <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+        </filter>
+        
+        <!-- Noise texture for aurora effects -->
+        <filter id="noise">
+          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+          <feColorMatrix type="saturate" values="0"/>
+        </filter>
+        
+        <!-- Soft glow filter -->
+        <filter id="soft-glow">
+          <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+    </svg>
+    
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

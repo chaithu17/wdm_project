@@ -1,0 +1,53 @@
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  background: rgba(255,255,255,0.9);
+  border-top: 1px solid rgba(229,231,235,1); /* tailwind gray-200 */
+  backdrop-filter: blur(6px);
+}
+
+.bottom-nav-list {
+  display: flex;
+  gap: 0.25rem;
+  max-width: 42rem; /* keep compact on larger phones */
+  margin: 0 auto;
+  padding: 0.25rem;
+  list-style: none;
+  justify-content: space-between;
+}
+
+.bottom-nav-item {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.bottom-nav-link {
+  display: inline-block;
+  width: 100%;
+  padding: 0.5rem 0.25rem;
+  color: #374151; /* tailwind gray-700 */
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: 0.5rem;
+  transition: background-color 150ms ease, color 150ms ease, transform 120ms ease;
+}
+
+.bottom-nav-link:hover,
+.bottom-nav-link:focus {
+  background: rgba(99,102,241,0.06); /* indigo-500 6% */
+  color: #4f46e5; /* indigo-600 */
+  outline: none;
+}
+
+/* Hide on medium+ screens where top nav exists */
+@media (min-width: 768px) {
+  .bottom-nav { display: none; }
+}
+
+/* Add a small safe-area for phones with home indicators */
+@supports (padding: max(0px)) {
+  .bottom-nav { padding-bottom: calc(env(safe-area-inset-bottom) + 0.25rem); }
+}
