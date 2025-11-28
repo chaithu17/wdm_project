@@ -70,9 +70,19 @@ class ApiClient {
 
     try {
       const response = await fetch(url, config);
-      
+
       // Handle non-OK responses
       if (!response.ok) {
+        // Handle 401 Unauthorized - clear token and redirect to login
+        if (response.status === 401) {
+          this.setToken(null);
+
+          // Only redirect if not already on signin page
+          if (!window.location.pathname.includes('/signin')) {
+            window.location.href = '/signin';
+          }
+        }
+
         const error = await response.json().catch(() => ({ message: response.statusText }));
         throw new Error(error.message || `HTTP ${response.status}: ${response.statusText}`);
       }
@@ -82,7 +92,7 @@ class ApiClient {
       if (contentType && contentType.includes('application/json')) {
         return await response.json();
       }
-      
+
       return null;
     } catch (error) {
       console.error('API Request Error:', error);

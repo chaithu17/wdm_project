@@ -1,0 +1,42 @@
+{
+  "name": "p2p-learning-backend",
+  "version": "1.0.0",
+  "description": "Backend API for P2P Learning Platform",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "db:migrate": "node src/database/migrate.js",
+    "db:seed": "node src/database/seed.js"
+  },
+  "keywords": [
+    "p2p",
+    "learning",
+    "tutoring",
+    "education"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "pg": "^8.11.3",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "multer": "^1.4.5-lts.1",
+    "socket.io": "^4.6.1",
+    "winston": "^3.11.0",
+    "compression": "^1.7.4",
+    "express-fileupload": "^1.4.3",
+    "uuid": "^9.0.1",
+    "stripe": "^14.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

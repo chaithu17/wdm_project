@@ -45,15 +45,9 @@ export default function SignIn() {
     );
   };
 
-function onSubmit(e) {
+async function onSubmit(e) {
   e.preventDefault();
   setError("");
-
-  if (email === "admin@email.com" && pw === "pass123") {
-    localStorage.setItem("user", JSON.stringify({ username: "admin", role: "admin" }));
-    nav("/admin", { replace: true });
-    return;
-  }
 
   // --- Existing Sign-Up logic ---
   if (isSignUp) {
@@ -68,7 +62,7 @@ function onSubmit(e) {
     }
 
     const nameToUse = fullName || email.split('@')[0];
-    const newUser = register({
+    const result = await register({
       name: nameToUse,
       email,
       password: pw,
@@ -77,20 +71,30 @@ function onSubmit(e) {
       bio
     });
 
-    if (newUser) {
-      nav('/app', { replace: true });
+    if (result.success) {
+      // Navigate based on user role
+      if (result.user.role === 'admin') {
+        nav('/admin', { replace: true });
+      } else {
+        nav('/app', { replace: true });
+      }
     } else {
-      setError('An account with this email already exists. Please sign in or use a different email.');
+      setError(result.error || 'Registration failed. Please try again.');
     }
     return;
   }
 
-  // --- Normal Login for non-admin users ---
-  const success = login(email, pw);
-  if (success) {
-    nav("/app", { replace: true });
+  // --- Normal Login ---
+  const result = await login(email, pw);
+  if (result.success) {
+    // Navigate based on user role
+    if (result.user.role === 'admin') {
+      nav('/admin', { replace: true });
+    } else {
+      nav('/app', { replace: true });
+    }
   } else {
-    setError("Invalid email or password.");
+    setError(result.error || 'Invalid email or password.');
   }
 }
 

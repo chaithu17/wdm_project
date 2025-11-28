@@ -33,9 +33,14 @@ export default function Documents() {
     loadDocuments();
   }, []);
 
-  const loadDocuments = () => {
-    const docs = documentService.getAllDocuments();
-    setDocuments(docs);
+  const loadDocuments = async () => {
+    try {
+      const docs = await documentService.getAllDocuments();
+      setDocuments(docs);
+    } catch (error) {
+      console.error('Error loading documents:', error);
+      alert('Failed to load documents. Please try again.');
+    }
   };
 
   const handleDrag = (e) => {
@@ -126,17 +131,19 @@ export default function Documents() {
     }
   };
 
-  const handleShare = (doc) => {
-    const result = documentService.shareDocument(doc.id);
+  const handleShare = async (doc) => {
+    const result = await documentService.shareDocument(doc.id);
     if (!result.success && result.error) {
       alert(`Share failed: ${result.error}`);
     }
   };
 
-  const handleToggleFavorite = (doc) => {
-    const result = documentService.toggleFavorite(doc.id);
+  const handleToggleFavorite = async (doc) => {
+    const result = await documentService.toggleFavorite(doc.id);
     if (result.success) {
       loadDocuments();
+    } else {
+      alert(`Failed to toggle favorite: ${result.error}`);
     }
   };
 
